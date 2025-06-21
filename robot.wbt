@@ -17,12 +17,12 @@ WorldInfo {
     ContactProperties {
       material1 "rubber"
       material2 "floor"
-      coulombFriction 10
+      coulombFriction 60
     }
     ContactProperties {
       material2 "floor"
       coulombFriction [
-        10
+        60
       ]
     }
   ]
@@ -41,7 +41,7 @@ Floor {
 
 Robot {
   name "SimpleQuadruped"
-  translation 0 0 0.2   # Elevado para compensar patas más largas
+  translation 0 0 0.24
   controller "my_controller"
   boundingObject Box { size 0.3 0.2 0.08 }
   physics Physics { mass 1 }
@@ -74,23 +74,23 @@ Robot {
       ]
       endPoint Solid {
         name "LF_leg"
-        translation 0.15 0.1 -0.12   # Posición Y ajustada para pata más larga
+        translation 0.15 0.1 -0.1075
         contactMaterial "rubber"
         children [
           Shape {
             geometry Box {
-              size 0.05 0.02 0.24    # Altura aumentada de 0.16 a 0.24
+              size 0.05 0.02 0.215
             }
             appearance PBRAppearance { baseColor 0.2 0.2 1 }
           }
           TouchSensor {
             name "LF_touch"
             type "bumper"
-            translation 0 0 -0.12     # Ajustado para nueva longitud
-            boundingObject Box { size 0.05 0.02 0.005 }            
+            translation 0 0 -0.11
+            boundingObject Box { size 0.05 0.02 0.01 }
           }
         ]
-        boundingObject Box { size 0.05 0.02 0.24 }   # Ajustado boundingObject
+        boundingObject Box { size 0.05 0.02 0.215 }
         physics Physics { mass 0.1 }
       }
     }
@@ -105,23 +105,23 @@ Robot {
       ]
       endPoint Solid {
         name "RF_leg"
-        translation 0.15 -0.1 -0.12   # Posición Y ajustada para pata más larga
+        translation 0.15 -0.1 -0.1075
         contactMaterial "rubber"
         children [
           Shape {
             geometry Box {
-              size 0.05 0.02 0.24    # Altura aumentada de 0.16 a 0.24
+              size 0.05 0.02 0.215
             }
             appearance PBRAppearance { baseColor 1 0.5 0 }
           }
           TouchSensor {
             name "RF_touch"
             type "bumper"
-            translation 0 0 -0.12     # Ajustado para nueva longitud
-            boundingObject Box { size 0.05 0.02 0.005 }
+            translation 0 0 -0.11
+            boundingObject Box { size 0.05 0.02 0.01 }
           }
         ]
-        boundingObject Box { size 0.05 0.02 0.24 }   # Ajustado boundingObject
+        boundingObject Box { size 0.05 0.02 0.215 }
         physics Physics { mass 0.1 }
       }
     }
@@ -136,23 +136,23 @@ Robot {
       ]
       endPoint Solid {
         name "LH_leg"
-        translation -0.15 0.1 -0.12   # Posición Y ajustada para pata más larga
+        translation -0.15 0.1 -0.1075
         contactMaterial "rubber"
         children [
           Shape {
             geometry Box {
-              size 0.05 0.02 0.24    # Altura aumentada de 0.16 a 0.24
+              size 0.05 0.02 0.215
             }
             appearance PBRAppearance { baseColor 0 1 0 }
           }
           TouchSensor {
             name "LH_touch"
             type "bumper"
-            translation 0 0 -0.12     # Ajustado para nueva longitud
-            boundingObject Box { size 0.05 0.02 0.005 }
+            translation 0 0 -0.11
+            boundingObject Box { size 0.05 0.02 0.01 }
           }
         ]
-        boundingObject Box { size 0.05 0.02 0.24 }   # Ajustado boundingObject
+        boundingObject Box { size 0.05 0.02 0.215 }
         physics Physics { mass 0.1 }
       }
     }
@@ -167,23 +167,23 @@ Robot {
       ]
       endPoint Solid {
         name "RH_leg"
-        translation -0.15 -0.1 -0.12   # Posición Y ajustada para pata más larga
+        translation -0.15 -0.1 -0.1075
         contactMaterial "rubber"
         children [
           Shape {
             geometry Box {
-              size 0.05 0.02 0.24    # Altura aumentada de 0.16 a 0.24
+              size 0.05 0.02 0.215
             }
             appearance PBRAppearance { baseColor 1 0 0 }
           }
           TouchSensor {
             name "RH_touch"
             type "bumper"
-            translation 0 0 -0.12     # Ajustado para nueva longitud
-            boundingObject Box { size 0.05 0.02 0.005 }            
+            translation 0 0 -0.11
+            boundingObject Box { size 0.05 0.02 0.01 }
           }
         ]
-        boundingObject Box { size 0.05 0.02 0.24 }   # Ajustado boundingObject
+        boundingObject Box { size 0.05 0.02 0.215 }
         physics Physics { mass 0.1 }
       }
     }
