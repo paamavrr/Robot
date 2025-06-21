@@ -1,0 +1,194 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+
+WorldInfo {
+  info [
+    "Demonstration of the alternate tripod gait using linear and rotational motors."
+    "Biologically Inspired Robotics Group (BIRG)"
+  ]
+  title "RobotPC"
+  CFM 0.0001
+  ERP 0.6
+  basicTimeStep 8
+  contactProperties [
+    ContactProperties {
+      material1 "rubber"
+      material2 "floor"
+      coulombFriction 10
+    }
+    ContactProperties {
+      material2 "floor"
+      coulombFriction [
+        10
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.24417638785947632 -0.07602983516356082 0.966745755499811 3.8807643497915727
+  position 2.2141299999999995 1.8881397005560983 1.4792659725751076
+}
+TexturedBackground {
+}
+Floor {
+  contactMaterial "floor"
+  size 50 50
+  tileSize 3 3
+}
+
+Robot {
+  name "SimpleQuadruped"
+  translation 0 0 0.2   # Elevado para compensar patas más largas
+  controller "my_controller"
+  boundingObject Box { size 0.3 0.2 0.08 }
+  physics Physics { mass 1 }
+  children [
+    # Cuerpo en el origen
+    Solid {
+      name "body"
+      translation 0 0 0
+      children [
+        DEF BODY_SHAPE Shape {
+          geometry Box {
+            size 0.3 0.2 0.08
+          }
+          appearance PBRAppearance { baseColor 0.7 0.7 0.7 }
+        }
+      ]
+      boundingObject USE BODY_SHAPE
+      physics Physics {
+        mass 3
+      }
+    }
+    # Pata delantera izquierda
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0.15 0.1 -0.04
+      }
+      device [
+        RotationalMotor { name "LF_motor" }
+      ]
+      endPoint Solid {
+        name "LF_leg"
+        translation 0.15 0.1 -0.12   # Posición Y ajustada para pata más larga
+        contactMaterial "rubber"
+        children [
+          Shape {
+            geometry Box {
+              size 0.05 0.02 0.24    # Altura aumentada de 0.16 a 0.24
+            }
+            appearance PBRAppearance { baseColor 0.2 0.2 1 }
+          }
+          TouchSensor {
+            name "LF_touch"
+            type "bumper"
+            translation 0 0 -0.12     # Ajustado para nueva longitud
+            boundingObject Box { size 0.05 0.02 0.005 }            
+          }
+        ]
+        boundingObject Box { size 0.05 0.02 0.24 }   # Ajustado boundingObject
+        physics Physics { mass 0.1 }
+      }
+    }
+    # Pata delantera derecha
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0.15 -0.1 -0.04
+      }
+      device [
+        RotationalMotor { name "RF_motor" }
+      ]
+      endPoint Solid {
+        name "RF_leg"
+        translation 0.15 -0.1 -0.12   # Posición Y ajustada para pata más larga
+        contactMaterial "rubber"
+        children [
+          Shape {
+            geometry Box {
+              size 0.05 0.02 0.24    # Altura aumentada de 0.16 a 0.24
+            }
+            appearance PBRAppearance { baseColor 1 0.5 0 }
+          }
+          TouchSensor {
+            name "RF_touch"
+            type "bumper"
+            translation 0 0 -0.12     # Ajustado para nueva longitud
+            boundingObject Box { size 0.05 0.02 0.005 }
+          }
+        ]
+        boundingObject Box { size 0.05 0.02 0.24 }   # Ajustado boundingObject
+        physics Physics { mass 0.1 }
+      }
+    }
+    # Pata trasera izquierda
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor -0.15 0.1 -0.04
+      }
+      device [
+        RotationalMotor { name "LH_motor" }
+      ]
+      endPoint Solid {
+        name "LH_leg"
+        translation -0.15 0.1 -0.12   # Posición Y ajustada para pata más larga
+        contactMaterial "rubber"
+        children [
+          Shape {
+            geometry Box {
+              size 0.05 0.02 0.24    # Altura aumentada de 0.16 a 0.24
+            }
+            appearance PBRAppearance { baseColor 0 1 0 }
+          }
+          TouchSensor {
+            name "LH_touch"
+            type "bumper"
+            translation 0 0 -0.12     # Ajustado para nueva longitud
+            boundingObject Box { size 0.05 0.02 0.005 }
+          }
+        ]
+        boundingObject Box { size 0.05 0.02 0.24 }   # Ajustado boundingObject
+        physics Physics { mass 0.1 }
+      }
+    }
+    # Pata trasera derecha
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor -0.15 -0.1 -0.04
+      }
+      device [
+        RotationalMotor { name "RH_motor" }
+      ]
+      endPoint Solid {
+        name "RH_leg"
+        translation -0.15 -0.1 -0.12   # Posición Y ajustada para pata más larga
+        contactMaterial "rubber"
+        children [
+          Shape {
+            geometry Box {
+              size 0.05 0.02 0.24    # Altura aumentada de 0.16 a 0.24
+            }
+            appearance PBRAppearance { baseColor 1 0 0 }
+          }
+          TouchSensor {
+            name "RH_touch"
+            type "bumper"
+            translation 0 0 -0.12     # Ajustado para nueva longitud
+            boundingObject Box { size 0.05 0.02 0.005 }            
+          }
+        ]
+        boundingObject Box { size 0.05 0.02 0.24 }   # Ajustado boundingObject
+        physics Physics { mass 0.1 }
+      }
+    }
+  ]
+}
+
+TexturedBackgroundLight {
+}
